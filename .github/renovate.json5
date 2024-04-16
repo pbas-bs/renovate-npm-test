@@ -1,0 +1,37 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:base",
+    "schedule:weekly",
+    ":autodetectPinVersions",
+    ":enableVulnerabilityAlerts",
+    ":labels(dependencies)",
+    ":preserveSemverRanges",
+    ":prImmediately",
+    ":rebaseStalePrs",
+    ":semanticCommits",
+    ":semanticPrefixChore",
+    ":separateMajorReleases",
+    ":timezone(Europe/Rome)",
+  ],
+  packageRules: [
+    {
+      groupName: "node minor + patch dependencies",
+      matchManagers: ["npm"],
+      matchUpdateTypes: ["minor", "patch"],
+    },
+  ],
+  draftPR: true,
+  reviewersFromCodeOwners: false,
+  reviewersSampleSize: 1,
+  stabilityDays: 2,
+  vulnerabilityAlerts: {
+    enabled: true,
+    draftPR: false,
+    reviewersFromCodeOwners: true,
+  },
+  prConcurrentLimit: 3,
+  prHourlyLimit: 2,
+  enabledManagers: ["npm"],
+  transitiveRemediation: true,
+}
